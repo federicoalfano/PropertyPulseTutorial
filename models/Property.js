@@ -1,4 +1,4 @@
-import {Schema, model, models} from 'moongoose';
+import {Schema, model, models} from 'mongoose';
 
 const PropertySchema = new Schema({
     
@@ -48,5 +48,9 @@ const PropertySchema = new Schema({
     ],
     is_featured: 
     {type: Boolean, default: false},
-    timestamps: true
-})
+    timestamps: {type: Date, default: Date.now}
+});
+
+const Property = models.Property || model('Property', PropertySchema);
+
+export default Property;
