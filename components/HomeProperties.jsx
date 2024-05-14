@@ -24,7 +24,6 @@ const HomeProperties = async () => {
             )}
           </div>
         </div>
-        xrzcoehFFxokEUZS
       </section>
       <section className="m-auto max-w-lg my-10 px-6">
         <Link
