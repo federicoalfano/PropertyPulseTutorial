@@ -1,6 +1,5 @@
 
-const apiDomain = process.env.NEXT_PUBLIC_API_URL || null
-console.log(apiDomain)
+const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null
 async function fetchProperties() {
     try {
         if(! apiDomain)
@@ -20,20 +19,29 @@ async function fetchProperties() {
   }
 
 
-async function fetchProperty(id) {
+  async function fetchProperty(id) {
     try {
-        if(! apiDomain)
-        {
-            return null;
-        }
-      const res = await fetch(`${apiDomain}/properties/${id}`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch property");
+      // Handle the case where the domain is not available yet
+      if (!apiDomain) {
+        console.error('API domain is not set');
+        return null;
       }
-  
+      
+      // Log the URL being fetched
+      const url = `${apiDomain}/properties/${id}`;
+      console.log(`Fetching property with URL: ${url}`);
+      
+      const res = await fetch(url);
+      
+      if (!res.ok) {
+        // Log response status and statusText for better debugging
+        console.error(`Failed to fetch property. Status: ${res.status}, StatusText: ${res.statusText}`);
+        throw new Error('Failed to fetch data');
+      }
+      
       return res.json();
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching property:', error);
       return null;
     }
   }
