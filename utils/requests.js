@@ -13,6 +13,7 @@ async function fetchProperties() {
   
       return res.json();
     } catch (error) {
+      
       console.log(error);
       return [];
     }
@@ -28,6 +29,7 @@ async function fetchProperties() {
       }
       
       // Log the URL being fetched
+      console.log(apiDomain)
       const url = `${apiDomain}/properties/${id}`;
       console.log(`Fetching property with URL: ${url}`);
       
